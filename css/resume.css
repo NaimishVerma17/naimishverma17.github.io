@@ -13,7 +13,7 @@ body {
 @media (min-width: 992px) {
   body {
     padding-top: 0;
-    padding-left: 17rem;
+    padding-left: 20rem;
   }
 }
 
@@ -76,7 +76,7 @@ p.lead {
 }
 
 .social-icons a:hover {
-  background-color: #BD5D38;
+  background-color: #218F76;
 }
 
 .dev-icons .list-inline-item {
@@ -95,6 +95,30 @@ p.lead {
   text-decoration: none;
 }
 
+.contact {
+  font-size: 20px;
+}
+
+.contact .c-me {
+  color: #218F76;
+  margin-left: 10px;
+}
+
+.contact .hire-me {
+  background: #218F76;
+  border-radius: 10px;
+  outline: none;
+}
+
+.contact .hire-me a {
+  color: white;
+  outline: none;
+}
+
+.contact .hire-me:hover {
+  background: #2bb898;
+}
+
 #sideNav .navbar-nav .nav-item .nav-link {
   font-weight: 800;
   letter-spacing: 0.05rem;
@@ -102,7 +126,7 @@ p.lead {
 }
 
 #sideNav .navbar-toggler:focus {
-  outline-color: #d48a6e;
+  outline-color: #2fcda9;
 }
 
 @media (min-width: 992px) {
@@ -113,7 +137,7 @@ p.lead {
     left: 0;
     display: flex;
     flex-direction: column;
-    width: 17rem;
+    width: 20rem;
     height: 100vh;
   }
   #sideNav .navbar-brand {
@@ -172,17 +196,17 @@ section.resume-section .resume-item .resume-date {
 }
 
 .bg-primary {
-  background-color: #BD5D38 !important;
+  background-color: #218F76 !important;
 }
 
 .text-primary {
-  color: #BD5D38 !important;
+  color: #218F76 !important;
 }
 
 a {
-  color: #BD5D38;
+  color: #218F76;
 }
 
 a:hover, a:focus, a:active {
-  color: #824027;
+  color: #135143;
 }

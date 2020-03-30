@@ -5,6 +5,7 @@ body {
   padding-top: 54px;
   color: $gray-600;
 }
+
 @media (min-width: 992px) {
   body {
     padding-top: 0;
@@ -40,7 +41,6 @@ h3 {
 .spacing {
   letter-spacing: 1.2px;
 }
-
 
 p.lead {
   font-size: 1.15rem;
@@ -94,3 +94,22 @@ p.lead {
   }
 }
 
+.contact {
+  font-size: 20px;
+  .c-me {
+    color: $primary;
+    margin-left: 10px;
+  }
+  .hire-me {
+    background: $primary;
+    border-radius: 10px;
+    outline: none;
+    a {
+      color: white;
+      outline: none;
+    }
+    &:hover {
+      background: lighten($primary, 10);
+    }
+  }
+}
