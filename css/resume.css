@@ -79,12 +79,20 @@ p.lead {
   background-color: #BD5D38;
 }
 
-.dev-icons {
-  font-size: 3rem;
+.dev-icons .list-inline-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
 }
 
-.dev-icons .list-inline-item i:hover {
-  color: #BD5D38;
+#interests li {
+  margin: 20px 0;
+}
+
+#interests li a:hover {
+  text-decoration: none;
 }
 
 #sideNav .navbar-nav .nav-item .nav-link {

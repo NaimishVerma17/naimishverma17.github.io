@@ -76,10 +76,21 @@ p.lead {
 }
 
 .dev-icons {
-  font-size: 3rem;
-  .list-inline-item i {
-    &:hover {
-      color: $primary;
+  .list-inline-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+  }
+}
+
+#interests {
+  li {
+    margin: 20px 0;
+    a:hover {
+      text-decoration: none;
     }
   }
 }
+
