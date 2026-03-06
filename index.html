@@ -1,373 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Naimish Verma — Full Stack & AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        :root {
+            --bg: #09090b;
+            --surface: #111114;
+            --surface2: #18181c;
+            --surface3: #1f1f24;
+            --border: rgba(255,255,255,0.09);
+            --border2: rgba(255,255,255,0.06);
+            --accent: #a78bfa;
+            --accent-bright: #c4b5fd;
+            --accent2: #f97316;
+            --accent3: #34d399;
+            --text: #f4f4f5;
+            --text2: #a1a1aa;
+            --text3: #71717a;
+        }
 
-    <title>Naimish Verma</title>
+        html { scroll-behavior: smooth; }
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: none;
+        }
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+        .cursor {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent-bright);
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+        .cursor-ring {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(167,139,250,0.35);
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9998;
+            transition: transform 0.28s ease, width 0.2s, height 0.2s;
+        }
 
-    <!-- Custom styles for this template -->
-    <link href="css/resume.min.css" rel="stylesheet">
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 999; opacity: 0.5;
+        }
 
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 64px;
+            background: rgba(9,9,11,0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border2);
+        }
+        .nav-logo {
+            font-family: 'Syne', sans-serif; font-weight: 800;
+            font-size: 17px; letter-spacing: -0.3px;
+            color: var(--text); text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a {
+            color: var(--text3); text-decoration: none;
+            font-size: 13px; transition: color 0.2s; font-weight: 400;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            padding: 120px 64px 80px;
+            position: relative; overflow: hidden;
+        }
+        .hero-orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(120px); pointer-events: none;
+        }
+        .orb1 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 65%);
+            top: -200px; right: -150px;
+            animation: float1 12s ease-in-out infinite alternate;
+        }
+        .orb2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(52,211,153,0.07) 0%, transparent 65%);
+            bottom: -100px; left: -100px;
+            animation: float2 15s ease-in-out infinite alternate;
+        }
+        @keyframes float1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-40px,50px) scale(1.05); } }
+        @keyframes float2 { from { transform: translate(0,0); } to { transform: translate(40px,-40px); } }
+
+        .hero-content { position: relative; z-index: 2; max-width: 820px; }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 28px; font-weight: 500;
+            animation: fadeUp 0.7s ease both;
+        }
+        .hero-eyebrow-line { width: 28px; height: 1px; background: var(--accent); opacity: 0.5; }
+
+        h1.hero-name {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(54px, 7.5vw, 100px);
+            font-weight: 800; line-height: 0.93;
+            letter-spacing: -3px; margin-bottom: 28px;
+            animation: fadeUp 0.7s 0.08s ease both;
+        }
+        h1.hero-name .ghost {
+            display: block; color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+        }
+        h1.hero-name .ghost em {
+            font-family: 'Instrument Serif', serif; font-style: italic;
+            -webkit-text-stroke: 1px rgba(167,139,250,0.4);
+        }
+
+        .hero-sub {
+            font-size: 16px; color: var(--text2); font-weight: 300;
+            max-width: 500px; line-height: 1.85; margin-bottom: 48px;
+            animation: fadeUp 0.7s 0.16s ease both;
+        }
+        .hero-sub strong { color: var(--text); font-weight: 500; }
+
+        .hero-cta {
+            display: flex; gap: 14px; flex-wrap: wrap;
+            animation: fadeUp 0.7s 0.24s ease both;
+        }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 28px; background: var(--accent);
+            color: #09090b; font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+            text-decoration: none; border-radius: 6px;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            background: var(--accent-bright); transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(167,139,250,0.3);
+        }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 28px; background: transparent;
+            color: var(--text2); font-family: 'Inter', sans-serif;
+            font-size: 13px; font-weight: 400; text-decoration: none;
+            border: 1px solid var(--border); border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+        .hero-scroll {
+            position: absolute; bottom: 40px; left: 64px;
+            font-size: 11px; color: var(--text3); letter-spacing: 0.12em;
+            text-transform: uppercase; display: flex; align-items: center; gap: 10px;
+            animation: fadeUp 0.7s 0.5s ease both;
+        }
+        .scroll-ticker {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--text3));
+            animation: tickerDrop 2.5s ease-in-out infinite;
+        }
+        @keyframes tickerDrop { 0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+        /* SECTION COMMONS */
+        section { padding: 100px 64px; }
+        .s-label {
+            font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 10px;
+            display: flex; align-items: center; gap: 10px; font-weight: 500;
+        }
+        .s-label::before { content:''; width:20px; height:1px; background:var(--accent); }
+        .s-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(30px, 4.5vw, 50px); font-weight: 700;
+            letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 56px;
+        }
+
+        /* ABOUT */
+        #about { background: var(--surface); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); }
+        .about-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: start; }
+        .about-body p { color: var(--text2); line-height: 1.95; margin-bottom: 18px; font-weight: 300; font-size: 15px; }
+        .about-body p strong { color: var(--text); font-weight: 500; }
+        .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border2); border-radius: 10px; overflow: hidden; }
+        .a-card { background: var(--surface2); padding: 28px 24px; transition: background 0.25s; }
+        .a-card:hover { background: var(--surface3); }
+        .a-card-num {
+            font-family: 'Syne', sans-serif; font-size: 38px;
+            font-weight: 800; letter-spacing: -1.5px;
+            color: var(--accent-bright); line-height: 1; margin-bottom: 4px;
+        }
+        .a-card-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+
+        /* STACK */
+        #stack { background: var(--bg); }
+        .stack-intro { color: var(--text2); max-width: 560px; line-height: 1.9; font-weight: 300; margin-bottom: 56px; font-size: 15px; }
+        .stack-intro strong { color: var(--text); font-weight: 500; }
+        .stack-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .stack-block {
+            background: var(--surface); border: 1px solid var(--border2);
+            border-radius: 10px; padding: 28px 24px;
+            position: relative; overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .stack-block:hover { border-color: rgba(167,139,250,0.25); transform: translateY(-3px); }
+        .stack-block.featured { border-color: rgba(52,211,153,0.2); background: rgba(52,211,153,0.02); }
+        .stack-block.featured:hover { border-color: rgba(52,211,153,0.4); }
+        .sb-glow {
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167,139,250,0.4), transparent);
+        }
+        .stack-block.featured .sb-glow { background: linear-gradient(90deg, transparent, rgba(52,211,153,0.5), transparent); }
+        .sb-icon { font-size: 22px; margin-bottom: 14px; }
+        .sb-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 10px; color: var(--text); }
+        .stack-block.featured .sb-title { color: var(--accent3); }
+        .sb-desc { font-size: 13px; color: var(--text3); line-height: 1.7; font-weight: 300; }
+        .sb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+        .stag { font-size: 11px; padding: 3px 9px; background: var(--surface2); color: var(--text2); border-radius: 4px; }
+        .stack-block.featured .stag { background: rgba(52,211,153,0.08); color: var(--accent3); }
+
+        /* EXPERIENCE */
+        #experience { background: var(--surface); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); }
+        .exp-grid { display: flex; flex-direction: column; gap: 20px; }
+        .exp-card {
+            background: var(--surface2); border: 1px solid var(--border2);
+            border-radius: 12px; padding: 36px 40px;
+            display: grid; grid-template-columns: 1fr 160px; gap: 24px;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s;
+        }
+        .exp-card.visible { opacity: 1; transform: translateY(0); }
+        .exp-card:hover { border-color: rgba(167,139,250,0.2); }
+        .exp-badge {
+            display: inline-block; font-size: 11px; letter-spacing: 0.08em;
+            padding: 4px 12px; border-radius: 20px;
+            border: 1px solid rgba(167,139,250,0.2);
+            color: var(--accent); margin-bottom: 14px; text-transform: uppercase;
+        }
+        .exp-card.current .exp-badge {
+            border-color: rgba(52,211,153,0.3); color: var(--accent3);
+            background: rgba(52,211,153,0.05);
+        }
+        .exp-company { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); margin-bottom: 4px; }
+        .exp-role-loc { font-size: 12px; color: var(--text3); margin-bottom: 18px; }
+        .exp-story { font-size: 14px; color: var(--text2); line-height: 1.85; font-weight: 300; margin-bottom: 20px; }
+        .exp-story strong { color: var(--text); font-weight: 500; }
+        .exp-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .exp-pill {
+            font-size: 11px; padding: 4px 10px;
+            background: var(--surface3); color: var(--text2);
+            border-radius: 4px; border: 1px solid var(--border2);
+        }
+        .exp-aside { text-align: right; }
+        .exp-period { font-size: 12px; color: var(--text3); line-height: 1.6; }
+        .exp-period strong { display: block; color: var(--text2); font-weight: 500; font-size: 13px; }
+
+        /* YOUTUBE */
+        #youtube { background: var(--bg); }
+        .yt-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .yt-text p { color: var(--text2); line-height: 1.9; font-weight: 300; font-size: 15px; }
+        .yt-text p + p { margin-top: 14px; }
+        .yt-card {
+            background: var(--surface); border: 1px solid var(--border2);
+            border-radius: 12px; padding: 40px 36px;
+            position: relative; overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .yt-card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-4px); }
+        .yt-glow {
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(249,115,22,0.5), transparent);
+        }
+        .yt-icon {
+            width: 52px; height: 52px;
+            background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+        }
+        .yt-icon svg { width: 24px; height: 24px; fill: #f97316; }
+        .yt-card-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
+        .yt-card-desc { font-size: 14px; color: var(--text2); line-height: 1.85; font-weight: 300; margin-bottom: 24px; }
+        .yt-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; color: #f97316; text-decoration: none;
+            font-weight: 500; transition: gap 0.2s;
+        }
+        .yt-link:hover { gap: 12px; }
+
+        /* CONTACT */
+        #contact { background: var(--surface); border-top: 1px solid var(--border2); }
+        .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+        .contact-inner .s-label { justify-content: center; }
+        .contact-inner .s-label::before { display: none; }
+        .contact-big {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(36px, 5.5vw, 64px);
+            font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+            margin-bottom: 18px;
+        }
+        .contact-big em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--accent); }
+        .contact-sub { font-size: 15px; color: var(--text2); font-weight: 300; margin-bottom: 44px; line-height: 1.8; }
+        .contact-email-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 600;
+            letter-spacing: -0.3px; color: var(--text); text-decoration: none;
+            border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 36px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .contact-email-btn:hover { color: var(--accent); border-color: rgba(167,139,250,0.3); }
+        .social-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .soc-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border: 1px solid var(--border);
+            border-radius: 6px; color: var(--text2); text-decoration: none;
+            font-size: 13px; transition: all 0.2s;
+        }
+        .soc-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .soc-btn svg { width: 14px; height: 14px; }
+
+        footer {
+            padding: 22px 64px; border-top: 1px solid var(--border2);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 12px; color: var(--text3);
+        }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: all 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            section { padding: 70px 24px; }
+            #hero { padding: 100px 24px 60px; }
+            .about-wrap, .yt-wrap { grid-template-columns: 1fr; gap: 40px; }
+            .stack-blocks { grid-template-columns: 1fr; }
+            .exp-card { grid-template-columns: 1fr; padding: 28px 24px; }
+            .exp-aside { text-align: left; }
+            footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+            .hero-scroll { left: 24px; }
+        }
+    </style>
 </head>
+<body>
 
-<body id="page-top">
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Naimish Verma</span>
-        <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-      </span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="#awards">Contact Me</a>
-            </li>
-        </ul>
-    </div>
+<!-- NAV -->
+<nav>
+    <a href="#hero" class="nav-logo">NV<span>.</span></a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#stack">Expertise</a></li>
+        <li><a href="#experience">Work</a></li>
+        <li><a href="#youtube">Channel</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 </nav>
 
-<div class="container-fluid p-0">
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">
+            <span class="hero-eyebrow-line"></span>
+            Full Stack Engineer · AI Systems
+        </div>
+        <h1 class="hero-name">
+            Naimish<br>
+            <span class="ghost">Verma<em>.</em></span>
+        </h1>
+        <p class="hero-sub">
+            I build systems that <strong>think, scale, and ship</strong>. From real-time backends and
+            cloud-native infrastructure to AI pipelines, RAG systems, and the interfaces
+            that bring them all together.
+        </p>
+        <div class="hero-cta">
+            <a href="#experience" class="btn-primary">See My Work ↓</a>
+            <a href="#contact" class="btn-ghost">Get in Touch</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-ticker"></div>
+        Scroll
+    </div>
+</section>
 
-    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
-        <div class="w-100">
-            <h1 class="mb-0 spacing">Naimish
-                <span class="text-primary">Verma</span>
-            </h1>
-            <div class="subheading mb-5  mt-2">Full Stack Software Developer
-            </div>
-            <p class="lead mb-5">
-                A technology enthusiast and resourceful full-stack software engineer,
-                I use the tools and resources at my disposal to create systems that save time,
-                help people work more effectively and improve the overall user experience.
-                I love to write clean and maintainable code, following all the best practises and guidelines by the
-                community.
+<!-- ABOUT -->
+<section id="about">
+    <div class="s-label reveal">About</div>
+    <div class="about-wrap">
+        <div class="about-body reveal">
+            <h2 class="s-title">Engineer by craft,<br>builder by nature.</h2>
+            <p>
+                I'm a Full Stack Developer with 6+ years of experience turning ambitious ideas into
+                <strong>production-grade systems</strong>. My work spans the full spectrum — from crafting
+                performant React frontends to architecting distributed backends that handle
+                real-time, high-frequency workloads without breaking a sweat.
             </p>
-            <p class="lead mb-5">
-                I enjoy being challenged and engaging with projects that require me
-                to work outside my comfort and knowledge set, as continuing to learn new languages
-                and development techniques are important to me.
+            <p>
+                More recently, I've been deep in the AI space — building <strong>LLM-powered pipelines,
+                RAG systems, and AI-driven automation workflows</strong> that go beyond the prototype stage
+                and actually make it to production.
             </p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/naimishverma17/" target="_blank">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/naimishverma17" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://twitter.com/NAIMISH17101998" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://www.facebook.com/naimish.verma.16" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5" id="experience">
-        <div class="w-100">
-            <h2 class="mb-5">Experience</h2>
-
-            <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Software Developer</h3>
-                    <div class="subheading mb-3 mt-2 spacing">REAS Group</div>
-                    <p>
-                        Currently working as a front end developer on one of their products.
-                        My job is to design the dashboard from scratch using all the best practises and
-                        community guidelines.
-                    </p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">July 2020 - Present</span>
-                </div>
-            </div>
-             <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Backend Developer</h3>
-                    <div class="subheading mb-3 mt-2 spacing">ExploApp</div>
-                    <p>
-                        My main role is to design the backend of the application from scratch.
-                        I also designed the server architecture on AWS which is highly secure and scalable.
-                    </p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">February 2021 - Present</span>
-                </div>
-            </div>
-<!--             <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Full Stack Developer</h3>
-                    <div class="subheading mb-3 mt-2 spacing">SOS-Kru</div>
-                    <p>
-                        Working as a full stack developer on their product. My job was to design the backend
-                        and administration dashboard from scratch and also to work on DevOps for CI/CD.
-                    </p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">February 2020 - January 2021</span>
-                </div>
-            </div> -->
-            <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Freelance Web Developer</h3>
-                    <div class="subheading mb-3 mt-2 spacing">StandByStand</div>
-                    <p>
-                        Currently working as an Angular developer. My role is to add new modules and features to the website.
-                    </p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">January 2020 - January 2021</span>
-                </div>
-            </div>
-
-            <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Web Developer</h3>
-                    <div class="subheading mb-3 mt-2 spacing">ESCECION TECHNOLOGIES PVT. LTD.</div>
-                    <p>I worked on Angular and Flutter projects during my Internship period.
-                        This company gave me every possible opportunity to grow as a Full stack developer.
-                        Here I worked on variety of projects which helped me enhancing by technical skills.
-                        Working in this company gave me enough experience on best industry level projects which turned
-                        out to be a great success for me.
-                    </p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">February 2018 - May 2019</span>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!--<hr class="m-0">-->
-
-    <section class="resume-section  p-3 p-lg-5" id="education">
-        <div class="w-100">
-            <h2 class="mb-5 spacing">Education</h2>
-
-            <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Ajay Kumar Garg Engineering College</h3>
-                    <div class="subheading mb-3 spacing">Bachelor of Technology</div>
-                    <div>Information Technology</div>
-                    <div class="mt-3">
-                        Learned core fundamentals of Computer Science.
-                        The course includes the deep dive in Data Structures and Algorithms along with core concepts of
-                        Database Design and Management.
-                        It also includes the subjects related to Networking and Operating Systems.
-                        Fundamentals of various programing languages like C, C++ and Python were also taught.
-                    </div>
-                </div>
-
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">August 2016 - September 2020</span>
-                </div>
-            </div>
-
-            <div class="resume-item mt-4 d-flex flex-column flex-md-row justify-content-between">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Seth M.R. Jaipuria School</h3>
-                    <div class="subheading mb-3 spacing">Intermediate</div>
-                    <p>95.2 percent</p>
-                    <div class="mt-3">
-                        Here I got my first interaction with the programming.
-                        Core Java along with all the Object Oriented Programming principles was taught.
-                    </div>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">July 2014 - April 2016</span>
-                </div>
-            </div>
-
-            <div class="resume-item mt-4 d-flex flex-column flex-md-row justify-content-between">
-                <div class="resume-content">
-                    <h3 class="mb-0 spacing">Lucknow Public School</h3>
-                    <div class="subheading mb-3 spacing">High School</div>
-                    <p>92.8 percent</p>
-                </div>
-                <div class="resume-date text-md-right">
-                    <span class="text-primary">April 2003 - March 2014</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5" id="skills">
-        <div class="w-100">
-            <h2 class="mb-5">Skills</h2>
-
-            <div class="subheading mb-3">Frameworks &amp; Tools</div>
-            <div class="row list-inline dev-icons">
-                <div class="row w-100">
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="100" height="100" src="img/angular.png"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="100" height="100" src="img/react.svg"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="100" height="100" src="img/flutter-logo.svg"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="120" height="100" src="img/nodejs.png"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="130" height="70" src="img/django.png"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="120" height="90" src="img/git-logo.png"/>
-                    </div>
-                </div>
-                <div class="row w-100">
-<!--                     <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="150" height="120" src="img/mysql.svg"/>
-                    </div> -->
-<!--                     <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="150" height="90" src="img/devops.png"/>
-                    </div> -->
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="150" height="90" src="img/aws.png"/>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="150" height="90" src="img/docker.png"/>
-                    </div>
-<!--                     <div class="col-md-2 col-lg-2 col-sm-2 list-inline-item">
-                        <img width="130" height="60" src="img/mongo.png"/>
-                    </div> -->
-                </div>
-            </div>
-
-            <div class="subheading mb-3 mt-4">Workflow</div>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Mobile-First, Responsive Design
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Browser Testing &amp; Debugging
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Cross Functional Teams
-                </li>
-                <li>
-                    <i class="fa-li fa fa-check"></i>
-                    Agile Development
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5" id="interests">
-        <div class="w-100">
-            <h2 class="mb-5">Interests</h2>
-            <p>Apart from being a developer, I spend most of my free time on Youtube.
-                I am a huge Cricket fan and never hesitate to watch old matches in the repeat mode.
-                Besides being a lazy person, I also love travelling. Till date I haven't explored much of the places but
-                there are many in my bucket list.
+            <p>
+                I've shipped as a founding engineer, led cloud infrastructure from scratch, and
+                taught thousands of developers through my YouTube channel. I care deeply about
+                <strong>code that scales, teams that move fast, and products that last.</strong>
             </p>
-            <p>I am a huge tea lover and if you want to discuss any cool project idea or just want to meet me, feel free
-                to call me on tea.</p>
-            <p class="mb-5">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television
-                shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology
-                advancements in the front-end web development world.</p>
-
-            <p class="mb-0">In my free time I love writing blogs on the trending topics.</p>
-            <ul>
-                <li>
-                    <a href="https://medium.com/@naimishverma50/android-writing-a-file-as-a-json-object-400131f6063b"
-                       target="_blank">Writing a file as JSON object in Android</a>
-                </li>
-                <li>
-                    <a href="https://medium.com/@naimishverma50/android-implementing-the-functionality-of-reply-from-notification-like-whatsapp-inline-reply-4aeddd15681"
-                       target="_blank">Implementing reply from notification like Whats App in Android</a>
-                </li>
-                <li>
-                    <a href="https://medium.com/@naimishverma50/git-merge-v-s-git-rebase-a742b7587991" target="_blank">Git
-                        Merge v/s Git Rebase</a>
-                </li>
-                <li>
-                    <a href="https://medium.com/@naimishverma50/node-backend-for-angular-using-nest-js-f9d1528ef2dc"
-                       target="_blank">Node backend for Angular using Nest JS.</a>
-                </li>
-            </ul>
         </div>
-    </section>
-
-    <hr class="m-0">
-
-    <section class="resume-section p-3 p-lg-5 " id="awards">
-        <div class="w-100">
-            <h2 class="mb-5">Contact Me</h2>
-            <div class="contact">
-                <p>Contact No: <span class="c-me">7897984410</span></p>
-                <p>Email: <span class="c-me">naimishverma50@gmail.com</span></p>
-                <button class="hire-me">
-                    <a href="mailto:naimishverma50@gmail.com" class="btn btn-default btn-lg" target="_blank">
-                        Click here to hire me!!
-                    </a>
-                </button>
+        <div class="about-cards reveal">
+            <div class="a-card">
+                <div class="a-card-num">6+</div>
+                <div class="a-card-label">Years Building</div>
             </div>
-
+            <div class="a-card">
+                <div class="a-card-num">4</div>
+                <div class="a-card-label">Companies Shipped</div>
+            </div>
+            <div class="a-card">
+                <div class="a-card-num">3</div>
+                <div class="a-card-label">Countries Worked In</div>
+            </div>
+            <div class="a-card">
+                <div class="a-card-num">∞</div>
+                <div class="a-card-label">Problems Solved</div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-</div>
+<!-- EXPERTISE -->
+<section id="stack">
+    <div class="s-label reveal">Expertise</div>
+    <h2 class="s-title reveal">What I build with.</h2>
+    <p class="stack-intro reveal">
+        My toolkit spans the full stack — but what excites me most right now is the intersection of
+        <strong>AI, automation, and intelligent systems</strong>. I don't just use these technologies;
+        I build real products with them.
+    </p>
+    <div class="stack-blocks">
+        <div class="stack-block featured reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">🤖</div>
+            <div class="sb-title">AI & Intelligent Systems</div>
+            <div class="sb-desc">Building production-ready AI pipelines — RAG architectures, LLM orchestration, vector search, and intelligent agents that solve real problems at scale.</div>
+            <div class="sb-tags">
+                <span class="stag">LangChain</span>
+                <span class="stag">RAG</span>
+                <span class="stag">Vector DBs</span>
+                <span class="stag">LLM APIs</span>
+                <span class="stag">n8n</span>
+                <span class="stag">Prompt Eng.</span>
+            </div>
+        </div>
+        <div class="stack-block reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">⚡</div>
+            <div class="sb-title">Backend & Real-Time Systems</div>
+            <div class="sb-desc">Designing event-driven backends and WebSocket systems built to handle serious scale — with caching layers and pub/sub patterns that keep things fast.</div>
+            <div class="sb-tags">
+                <span class="stag">Node.js</span>
+                <span class="stag">Django</span>
+                <span class="stag">FastAPI</span>
+                <span class="stag">GraphQL</span>
+                <span class="stag">Redis</span>
+                <span class="stag">WebSockets</span>
+            </div>
+        </div>
+        <div class="stack-block reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">🎨</div>
+            <div class="sb-title">Frontend & Interfaces</div>
+            <div class="sb-desc">React and Next.js applications that are fast, accessible, and built to reflect the complexity of the data they display — without the mess.</div>
+            <div class="sb-tags">
+                <span class="stag">React</span>
+                <span class="stag">Next.js</span>
+                <span class="stag">TypeScript</span>
+                <span class="stag">Redux</span>
+                <span class="stag">Vue</span>
+                <span class="stag">Tailwind</span>
+            </div>
+        </div>
+        <div class="stack-block reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">☁️</div>
+            <div class="sb-title">Cloud & Infrastructure</div>
+            <div class="sb-desc">End-to-end AWS setups — from compute and media pipelines to monitoring — built for high availability, security, and repeatability.</div>
+            <div class="sb-tags">
+                <span class="stag">AWS</span>
+                <span class="stag">Docker</span>
+                <span class="stag">CI/CD</span>
+                <span class="stag">Lambda</span>
+                <span class="stag">CloudFront</span>
+            </div>
+        </div>
+        <div class="stack-block reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">🗄️</div>
+            <div class="sb-title">Data & Storage</div>
+            <div class="sb-desc">The right data layer for the right problem — relational, document, cache, or vector. Designed for performance, not just correctness.</div>
+            <div class="sb-tags">
+                <span class="stag">PostgreSQL</span>
+                <span class="stag">MongoDB</span>
+                <span class="stag">Redis</span>
+                <span class="stag">MySQL</span>
+                <span class="stag">Vector DBs</span>
+            </div>
+        </div>
+        <div class="stack-block reveal">
+            <div class="sb-glow"></div>
+            <div class="sb-icon">🔗</div>
+            <div class="sb-title">Automation & Workflows</div>
+            <div class="sb-desc">Connecting systems, automating pipelines, and eliminating repetitive work — using AI-native tools to create multiplier-level productivity.</div>
+            <div class="sb-tags">
+                <span class="stag">n8n</span>
+                <span class="stag">Webhooks</span>
+                <span class="stag">Python</span>
+                <span class="stag">Firebase</span>
+                <span class="stag">JS / TS</span>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="s-label reveal">Work History</div>
+    <h2 class="s-title reveal">Where I've made<br>an impact.</h2>
+    <div class="exp-grid">
 
-<!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <div class="exp-card current">
+            <div class="exp-card-main">
+                <div class="exp-badge">Current</div>
+                <div class="exp-company">YouMeWho INC.</div>
+                <div class="exp-role-loc">Full Stack Developer · California, US (Remote)</div>
+                <p class="exp-story">
+                    Leading the architecture of a <strong>real-time data platform</strong> where speed is everything. Designed the event-driven backend from scratch — built on Node.js, MongoDB, Redis, and WebSockets — capable of handling high-frequency updates without flinching. Alongside it, a <strong>live analytics dashboard</strong> that turns raw data streams into decisions, all running on a cloud infrastructure I built end-to-end on AWS.
+                </p>
+                <div class="exp-pills">
+                    <span class="exp-pill">Real-Time Architecture</span>
+                    <span class="exp-pill">Event-Driven Systems</span>
+                    <span class="exp-pill">Redis Pub/Sub</span>
+                    <span class="exp-pill">AWS Infrastructure</span>
+                    <span class="exp-pill">Analytics Dashboard</span>
+                </div>
+            </div>
+            <div class="exp-aside">
+                <div class="exp-period"><strong>Jun 2025 — Present</strong>California, US</div>
+            </div>
+        </div>
 
-<!-- Custom scripts for this template -->
-<script src="js/resume.min.js"></script>
+        <div class="exp-card">
+            <div class="exp-card-main">
+                <div class="exp-badge">4 Years</div>
+                <div class="exp-company">Explo GmbH <span style="font-size:13px;color:var(--text3);font-weight:400">(Acq. by HUP GmbH)</span></div>
+                <div class="exp-role-loc">Founding Full Stack Developer · Kiel, Germany (Remote)</div>
+                <p class="exp-story">
+                    Joined as the first engineer and built the company's entire technical foundation. Over four years, I touched everything — GraphQL APIs, React admin panels, and AWS infrastructure. The standout: a <strong>cloud video streaming pipeline</strong> that served thousands of concurrent users, and an <strong>AI-powered content engine</strong> using ChatGPT and Stability AI that automatically transformed news articles into short-form web stories — compressing hours of editorial work into seconds.
+                </p>
+                <div class="exp-pills">
+                    <span class="exp-pill">Founding Engineer</span>
+                    <span class="exp-pill">GraphQL + Django</span>
+                    <span class="exp-pill">AI Content Pipeline</span>
+                    <span class="exp-pill">Video Streaming (AWS)</span>
+                    <span class="exp-pill">ChatGPT + Stability AI</span>
+                </div>
+            </div>
+            <div class="exp-aside">
+                <div class="exp-period"><strong>Feb 2021 — May 2025</strong>Germany (Remote)</div>
+            </div>
+        </div>
 
+        <div class="exp-card">
+            <div class="exp-card-main">
+                <div class="exp-badge">Contract</div>
+                <div class="exp-company">KonnekApp, REAS Group</div>
+                <div class="exp-role-loc">Full Stack Developer · London, UK (Remote)</div>
+                <p class="exp-story">
+                    Built the client-facing intelligence layer for a property platform — <strong>real-time KPI dashboards</strong> that gave decision-makers instant visibility into what mattered most. Backed by Node.js + Firebase APIs, the platform delivered live data synchronization across devices with no perceptible lag.
+                </p>
+                <div class="exp-pills">
+                    <span class="exp-pill">React + TypeScript</span>
+                    <span class="exp-pill">MobX / Chakra UI</span>
+                    <span class="exp-pill">WebSocket APIs</span>
+                    <span class="exp-pill">Real-Time Sync</span>
+                </div>
+            </div>
+            <div class="exp-aside">
+                <div class="exp-period"><strong>Jul 2020 — Feb 2021</strong>London, UK</div>
+            </div>
+        </div>
+
+        <div class="exp-card">
+            <div class="exp-card-main">
+                <div class="exp-badge">Early Career</div>
+                <div class="exp-company">Devslane</div>
+                <div class="exp-role-loc">Frontend Developer · Ghaziabad, India</div>
+                <p class="exp-story">
+                    Where it all started. Built UI components with Angular and React for multiple client products, wired up state management with Redux and MobX, and developed a rigorous testing culture with Jest — achieving high coverage while keeping the codebase clean and maintainable.
+                </p>
+                <div class="exp-pills">
+                    <span class="exp-pill">React / Angular</span>
+                    <span class="exp-pill">Redux + MobX</span>
+                    <span class="exp-pill">Jest Testing</span>
+                </div>
+            </div>
+            <div class="exp-aside">
+                <div class="exp-period"><strong>Feb 2018 — May 2019</strong>Ghaziabad, India</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- YOUTUBE -->
+<section id="youtube">
+    <div class="s-label reveal">Beyond Work</div>
+    <div class="yt-wrap">
+        <div class="yt-text reveal">
+            <h2 class="s-title">Teaching what<br>I know.</h2>
+            <p>I ran a YouTube channel where I broke down complex development topics into practical, hands-on tutorials — from full stack architecture to modern JavaScript patterns.</p>
+            <p>Teaching forced me to understand things more deeply. The questions developers asked shaped how I think about building software — clearly, deliberately, and with the next person in mind.</p>
+        </div>
+        <div class="yt-card reveal">
+            <div class="yt-glow"></div>
+            <div class="yt-icon">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="yt-card-title">Evoqys — Coding Tutorials</div>
+            <div class="yt-card-desc">A developer education channel covering full stack development, JavaScript, React, and backend systems. Built for developers who learn best by doing.</div>
+            <a href="https://www.youtube.com/@evoqys" target="_blank" class="yt-link">Visit Channel →</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="contact-inner">
+        <div class="s-label reveal">Contact</div>
+        <h2 class="contact-big reveal">Have something<br><em>interesting?</em></h2>
+        <p class="contact-sub reveal">
+            Whether it's a product idea, a technical challenge, or a collaboration worth exploring —
+            I'm always up for a good conversation.
+        </p>
+        <a href="mailto:naimishverma50@gmail.com" class="contact-email-btn reveal">
+            naimishverma50@gmail.com ↗
+        </a>
+        <div class="social-row reveal">
+            <a href="https://linkedin.com/in/naimishverma" target="_blank" class="soc-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com/naimishverma17" target="_blank" class="soc-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+            </a>
+            <a href="https://www.youtube.com/@evoqys" target="_blank" class="soc-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                YouTube
+            </a>
+            <a href="tel:+917897984410" class="soc-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +91 789 798 4410
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span>© 2025 Naimish Verma</span>
+    <span>Full Stack & AI Engineer · Lucknow, India</span>
+</footer>
+
+<script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function tick(){
+        cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;
+        rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
+        ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;
+        requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a,button').forEach(el=>{
+        el.addEventListener('mouseenter',()=>{ring.style.width='50px';ring.style.height='50px';});
+        el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';});
+    });
+    const obs=new IntersectionObserver(entries=>{
+        entries.forEach((e,i)=>{
+            if(e.isIntersecting){
+                setTimeout(()=>e.target.classList.add('visible'),i*70);
+                obs.unobserve(e.target);
+            }
+        });
+    },{threshold:0.08});
+    document.querySelectorAll('.reveal,.exp-card').forEach(el=>obs.observe(el));
+</script>
 </body>
-
 </html>
